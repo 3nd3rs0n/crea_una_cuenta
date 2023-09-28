@@ -1,7 +1,7 @@
 
 const Alert = ({mensaje}) => {
   return (
-    <div className="text-bg-danger p-3">
+    <div className="text-bg-warning p-3">
       <p>{mensaje}</p>
     </div>
   )
