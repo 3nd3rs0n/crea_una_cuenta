@@ -1,34 +1,42 @@
-import Alert from "../Alert/Alert"
-import Formulario from "../Formulario/Formulario"
-import SocialButton from "../SocialButton/SocialButton"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome" // este importa font awesome global
-// import {faBell} from "@fortawesome/free-solid-svg-icons" // este importa los iconos (no lo estoy usando)
-import{faFacebook,faYoutube,faInstagram} from "@fortawesome/free-brands-svg-icons" // este importa los iconos de redes sociales 
-
-
+import React, { useState } from "react";
+import Alert from "../Alert/Alert";
+import Formulario from "../Formulario/Formulario";
+import SocialButton from "../SocialButton/SocialButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faInstagram,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Registro = () => {
-  return (
-    <div>
-        <h1>crea una cuenta</h1>
-        <p>o usa tus redes sociales para registrarte</p>
-        
-        <SocialButton
-        instagram = {<FontAwesomeIcon icon={faInstagram} size="2xl"  />}
-        facebook = {<FontAwesomeIcon icon={faFacebook} size="2xl"  />} 
-        youtube = {<FontAwesomeIcon icon={faYoutube} size="2xl" />} 
-        
-        />
-        <br />
-        
-        <Formulario/>
-        
-        
-    
-       
-        
-    </div>
-  )
-}
+  const [mensaje, setMensaje] = useState("");
+  const [tipoAlerta, setTipoAlerta] = useState(""); // Opcional para cambiar el color de la alerta
 
-export default Registro
+  const mostrarMensaje = (texto, tipo) => {
+    setMensaje(texto);
+    setTipoAlerta(tipo);
+  };
+
+  return (
+    <div className="card p-4">
+      <h1 className="text-center">Crea una cuenta</h1>
+      <p className="text-center">O utiliza tus redes sociales para registrarte</p>
+
+      <SocialButton
+        instagram={<FontAwesomeIcon icon={faInstagram} size="2x" />}
+        facebook={<FontAwesomeIcon icon={faFacebook} size="2x" />}
+        youtube={<FontAwesomeIcon icon={faYoutube} size="2x" />}
+      />
+      <br />
+
+      <Formulario mostrarMensaje={mostrarMensaje} />
+
+      {mensaje && (
+        <Alert mensaje={mensaje} tipo={tipoAlerta} />
+      )}
+    </div>
+  );
+};
+
+export default Registro;
